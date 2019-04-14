@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %}AskAlex {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-fixed-top bg-info d-flex flex-row-reverse justify-content-between p-3">
+         <div class="navbar justify-content-end" id="navbarSupportedContent">
+             <ul class="nav justify-content-end">
+                 <li class="nav-item active">
+                      <a class="nav-link  text-danger" href="#"> sign in </a>
+                 </li>
+                  <li class="nav-item  active">
+                      <a class="nav-link  text-danger" href="#"> authorize </a>
+                 </li>
+             </ul>
+        </div>
+
+        <form class="form-inline">
+            <input class="form-control mr-sm-2 my-2 " type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-danger my-2  my-sm-0 " type="submit">Ask!</button>
+        </form>
+         <a class="navbar-brand text-danger " href="#"><p class="font-weight-bolder mb-0 pb-0 ">AskAlex</p></a>
+
+    </nav>
+    <div class="container-fluid mb-5 pb-5">
+        <div class="row">
+            <div class="col-8  d-inline-block mt-4 p-1">
+                 {% block content %}
+                Here is going to be information
+                 {% endblock %}
+            </div>
+            <div class="col-3 offset-md-1 p-1 mx-2 d-flex flex-column justify-content-around">
+                <div class="row my-4 p-1 ">
+                    <div class="col-12 ">
+                        <h1><p class="font-italic">Popular tags</p></h1>
+                        <p>
+                            there are going to be tags
+                        </p>
+
+                    </div>
+                </div>
+                 <div class="row my-4 p-1 ">
+                    <div class="col-12 ">
+                        <h1><p class="font-italic">Best Members</p></h1>
+                        <p>
+                            there are going to be best members
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer class="fixed-bottom p-2 bg-secondary" > Alex Spiridonova </footer>
+    <script src="static/js/bootstrap.js"></script>
+    <script src="static/js/bootstrap.bundle.js"></script>
+</body>
+</html>
