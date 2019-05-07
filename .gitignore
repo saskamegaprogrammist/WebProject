@@ -1,9 +1,13 @@
 *.pyc
 *~
 __pycache__
+.myenv
+.myvenv
 myenv/
 myvenv/
 db.sqlite3
 /static
 .DS_Store
-.idea
+.idea/*.iml
+.idea/*.xml
+.gitignore
