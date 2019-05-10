@@ -2,7 +2,46 @@
 body {
     padding-left: 0px;
 }
-.question{
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+h1 {
+    font-size:280%;
+    font-family: 'Sofia', cursive;
+}
+h2 {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+h3{
     font-size:180%;
+    font-family: 'Cantarell', sans-serif;
+}
+
+h4{
+    font-family: 'Cantarell', sans-serif;
+}
+p{  font-size:140%;
+    font-family: 'Cantarell', sans-serif;
+}
+.answer {
+    background-color: #9a95ad;
+}
+
+
+
+.col-fixed{
+    height: 200%;
+}
+.row-flex {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+}
+/* vertical spacing between columns */
+[class*=”col-”] {
+margin-bottom: 30px;
+}
+.content {
+    height: 100%;
+    padding: 20px 20px 10px;
+    color: #fff;
 }

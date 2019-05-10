@@ -9,3 +9,13 @@ def post_list(request):
 
 def ask_question(request):
     return render(request, 'blog/ask.html',)
+
+def see_question(request):
+    return render(request, 'blog/question.html',)
+
+def login(request):
+    return render(request, 'blog/login.html',)
+
+
+def signup(request):
+    return render(request, 'blog/signup.html',)

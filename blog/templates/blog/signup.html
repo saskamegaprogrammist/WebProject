@@ -1,0 +1,83 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %} Signup {% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row d-flex justify-content-start">
+           <h3 class="ml-3">Signup</h3>
+    </div>
+    <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-dark" novalidate>
+        <div class="form-group">
+            <div class="row d-flex justify-content-start">
+                <label  class="col-2 ml-3 p-1" for="Login"><p class="question d-flex justify-content-between text-justify font-weight-light text-white">Login:</p></label>
+                <div class="col-9 offset-md-1 m-2 pt-2">
+                <input type="text" class="form-control is-invalid form-control-lg  " id="Login" aria-describedby="loginHelp" placeholder="Enter your login" required>
+                 <div class="invalid-feedback">
+                     <p>Wrong login</p>
+                </div>
+                </div>
+            </div>
+        </div>
+          <div class="form-group">
+            <div class="row d-flex justify-content-start">
+                <label  class="col-2 ml-3 p-1" for="NickName"><p class="question d-flex justify-content-between text-justify font-weight-light text-white">NickName:</p></label>
+                <div class="col-9 offset-md-1 m-2 pt-2">
+                <input type="text" class="form-control is-invalid form-control-lg  " id="NickName" aria-describedby="nicknameHelp" placeholder="Enter your NickName" required>
+                 <div class="invalid-feedback">
+                     <p>Enter NickName</p>
+                </div>
+                </div>
+            </div>
+        </div>
+          <div class="form-group">
+            <div class="row <div class d-flex justify-content-start">
+                <label  class="col-2 ml-3  p-1" for="Email"><p class="question d-flex justify-content-between text-justify  text-white font-weight-light">Email:</p></label>
+                <div class="col-9 offset-md-1 m-2 pt-2">
+                <input type="email" class="input-lg form-control form-control-lg is-invalid " id="Email" aria-describedby="emailHelp" placeholder="Enter your email" required>
+                <div class="invalid-feedback">
+                     <p>Email already taken</p>
+                </div>
+                </div>
+            </div>
+        </div>
+          <div class="form-group">
+            <div class="row <div class d-flex justify-content-start">
+                <label  class="col-2 ml-3  p-1" for="Passw"><p class="question d-flex justify-content-between text-justify  text-white font-weight-light">Password:</p></label>
+                <div class="col-9 offset-md-1 m-2 pt-2">
+                <input type="password" class="input-lg form-control is-invalid form-control-lg" id="Passw" aria-describedby="passwHelp" placeholder="Enter your password" required>
+                <div class="invalid-feedback">
+                     <p>Enter password</p>
+                </div>
+                </div>
+            </div>
+        </div>
+         <div class="form-group">
+            <div class="row <div class d-flex justify-content-start">
+                <label  class="col-2 ml-3  p-1" for="Passw"><p class="question d-flex justify-content-between text-justify  text-white font-weight-light">Repeat password:</p></label>
+                <div class="col-9 offset-md-1 m-2 pt-2">
+                <input type="password" class="input-lg form-control is-invalid form-control-lg" id="PasswRepeat" aria-describedby="passwRHelp" placeholder="Repeat your password" required>
+                <div class="invalid-feedback">
+                     <p>Passwords don't match</p>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row <div class d-flex justify-content-start">
+            <div class="col-2 ml-3  p-1 text-white" >
+                <p> Upload avatar:</p>
+            </div>
+            <div class="custom-file col-9 offset-lg-1 m-2 pt-2">
+                 <input type="file" class=" input-lg custom-file-input" id="avatar">
+                <label class="custom-file-label form-control-lg" for="avatar"><h4> C://</h4></label>
+            </div>
+        </div>
+        <div class="row <div class d-flex justify-content-start">
+        <button class="btn btn-danger ml-4  offset-0" type="submit"><h4 class="mt-1">SignUp!</h4></button>
+        </div>
+    </form>
+
+
+</div>
+
+
+{% endblock %}
