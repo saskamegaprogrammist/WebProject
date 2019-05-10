@@ -5,6 +5,9 @@ __pycache__
 .myenv
 myenv/
 myenv.bak/
+.myvenv
+myvenv/
+myvenv.bak/
 db.sqlite3
 /static
 .DS_Store
