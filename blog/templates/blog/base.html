@@ -17,10 +17,10 @@
          <div class="navbar justify-content-end" id="navbarSupportedContent">
              <ul class="nav justify-content-end">
                  <li class="nav-item active">
-                      <a class="nav-link  text-danger" href="#"> sign in </a>
+                      <a class="nav-link  text-danger" href="{% url 'blog:signup' %}"> Sign Up </a>
                  </li>
                   <li class="nav-item  active">
-                      <a class="nav-link  text-danger" href="#"> authorize </a>
+                      <a class="nav-link  text-danger" href="{% url 'blog:login' %}"> Login </a>
                  </li>
              </ul>
         </div>
@@ -29,7 +29,7 @@
             <input class="form-control mr-sm-2 my-2 " type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-danger my-2  my-sm-0 " type="submit"><h4 class="mt-1">Ask!</h4></button>
         </form>
-        <a class="navbar-brand text-danger " href="#"><p class="font-weight-bolder mb-0 pb-0 "><h2>AskAlex</h2></p></a>
+        <a class="navbar-brand text-danger " href="{% url 'blog:index' %}"><p class="font-weight-bolder mb-0 pb-0 "><h2>AskAlex</h2></p></a>
 
     </nav>
     <div class="container-fluid mb-5 pb-5 bg-light">
@@ -39,16 +39,18 @@
                 Here is going to be information
                  {% endblock %}
             </div>
-            <div class="col-3 offset-md-1 p-1 mx-2 d-flex flex-column justify-content-around">
+            <div class="col-3 offset-md-1 p-1 mx-2 d-flex flex-column justify-content-start">
+                <div class="row mt-5 pt-5 d-flex justify-content-start">
+                </div>
                 <div class="row my-4 p-1 ">
                     <div class="col-12 ">
                         <h1 class="font-italic">Popular tags</h1>
                          <ul class="nav m-0 justify-content-start" type="none">
                         <li class="nav-item">
-                            <a class="nav-link active mt-2"  href="#"><p> tag1 </p></a>
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' questions.0.tag.tag1 %}"><p> {{questions.0.tag.tag1}} </p></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active mt-2"  href="#"> <p> tag2 </p></a>
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' questions.0.tag.tag2 %}"><p> {{questions.0.tag.tag2}} </p></a>
                         </li>
                     </ul>
 

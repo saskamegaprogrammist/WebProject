@@ -1,0 +1,48 @@
+{% load static %}
+
+<div class="row d-flex flex-row justify-content-start ">
+            <span class="border border-secondary p-1 m-1 w-100 bg-dark rounded-lg ">
+                <div class="row d-flex justify-content-center w-100">
+                     <div class="col-4 offset-1 m-0 p-1">
+                         <img class=" rounded-circle m-3 p-3" width="240" height="240" src="{% static 'img/cPZsn8GYw6c.jpg' %}" alt="AVATAR">
+                     </div>
+                    <div class="col-6 mt-5 p-4">
+                          <div class="row d-flex justify-content-center p-2 m-1">
+                             <h3 class="d-flex justify-content-between text-justify font-weight-light text-white font-italic">{{question.title}}</h3>
+                          </div>
+                          <div class="row d-flex justify-content-center p-2 m-1">
+                             <p class="text-white"> {{question.text}} </p>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-start p-2 m-1">
+                    <div class="col-4">
+                        <div class="row d-flex justify-content-start p-2 m-1">
+                        <span class=" col-4 bg-secondary border border-secondary rounded-lg p-1 w-100"><p class="justify-content-center pt-3 text-center text-white">{{question.likes}}</p></span>
+                        <button type="button" class=" p-1 col-4 btn btn-danger rounded-lg btn-sm">Dislike</button>
+                        <button type="button" class=" p-1 col-4 btn btn-success rounded-lg btn-sm">Like</button>
+                        </div>
+                    </div>
+                    <div class="col-4 pt-2 mt-2">
+                        <div class="row d-flex justify-content-start ">
+                            <a class="nav-link active mt-2"  href="{% url 'blog:question_num' question.id %}"><p> Answers</p> </a>
+                            <span class=" col-4 bg-secondary border border-secondary rounded-lg p-1 w-100"><p class="justify-content-center pt-3 text-center text-white">{{question.answers|length}}</p></span>
+                        </div>
+                    </div>
+                    <div class="col-4 pt-2 mt-2">
+                    <ul class="nav m-0 justify-content-center" type="none">
+                        <li>
+                            <p class="mt-3 text-white" > Tags:</p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' question.tag.tag1 %}"><p> {{question.tag.tag1}} </p></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' question.tag.tag2 %}"> <p> {{question.tag.tag2}}</p></a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </span>
+    </div>

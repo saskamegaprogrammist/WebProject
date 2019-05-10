@@ -1,0 +1,37 @@
+{% load static %}
+
+  <div class="row d-flex flex-row justify-content-center ">
+            <span class=" answer border border-white p-1 m-1 w-100 rounded-lg ">
+                <div class="row d-flex justify-content-center w-100">
+                     <div class="col-4 offset-1 m-0 p-1">
+                         <img class=" rounded-circle m-3 p-3" width="240" height="240" src="{% static 'img/photoeditorsdk-export.png' %}" alt="AVATAR">
+                     </div>
+                    <div class="col-6 mt-5 p-4">
+                          <div class="row d-flex justify-content-center p-2 mt-5">
+                             <h3 class="text-white"> {{answer}} </h3>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-start p-2 m-1">
+                    <div class="col-4">
+                        <div class="row d-flex justify-content-start p-2 m-1">
+                        <span class=" col-4 bg-secondary border border-secondary rounded-lg p-1 w-100"><p class="justify-content-center pt-3 text-center text-white">Num</p></span>
+                        <button type="button" class=" p-1 col-4 btn btn-danger rounded-lg btn-sm">Dislike</button>
+                        <button type="button" class=" p-1 col-4 btn btn-success rounded-lg btn-sm">Like</button>
+                        </div>
+                    </div>
+                    <div class="offset-2 col-6 pt-2 mt-2">
+                        <div class="row d-flex justify-content-center border border-secondary bg-secondary rounded-lg mt-4 w-25">
+                             <div class="form-check">
+                            <input class="form-check-input " type="checkbox" value="" id="CorrectAnswer">
+                            <label class="form-check-label text-white" for="CorrectAnswer">
+                                Correct
+                            </label>
+                        </div>
+                          </div>
+
+                    </div>
+                </div>
+            </span>
+    </div>
