@@ -14,34 +14,11 @@
         </div>
     </div>
     {% endblock %}
-    {% for question in questions %}
+    {% for question in paginations %}
         {% include "blog/question_templ.html" %}
     {% endfor %}
 
-    <div class="row d-flex flex-row justify-content-start ml--1 mt-4">
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if questions.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">First</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.previous_page_number }}">{{ questions.previous_page_number }}</a>
-                </li>
-                {% endif %}
-                 {% if questions.has_next%}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.next_page_number }}">{{ questions.next_page_number }}</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ questions.paginator.num_pages }}">Last</a>
-                </li>
-                {% endif %}
-
-
-             </ul>
-        </nav>
-    </div>
+    {% include "blog/paginator.html" %}
 
 </div>
 {% endblock %}
