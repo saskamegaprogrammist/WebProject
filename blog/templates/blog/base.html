@@ -40,28 +40,38 @@
                  {% endblock %}
             </div>
             <div class="col-3 offset-md-1 p-1 mx-2 d-flex flex-column justify-content-start">
-                <div class="row mt-5 pt-5 d-flex justify-content-start">
+                <div class="row mt-4 pt-4 d-flex justify-content-start">
+                        <span class=" col-6 offset-md-3 answer border border-secondary rounded-lg p-1 w-100">
+                            <a href="{% url 'blog:ask' %}">
+                                <h2 class="justify-content-center pt-3 text-center text-white">Ask! your question</h2>
+                            </a>
+                        </span>
                 </div>
-                <div class="row my-4 p-1 ">
+                <div class="row offset-md-2 my-4 p-1 mt-5 pt-5 ">
                     <div class="col-12 ">
                         <h1 class="font-italic">Popular tags</h1>
                          <ul class="nav m-0 justify-content-start" type="none">
                         <li class="nav-item">
-                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' questions.0.tag.tag1 %}"><p> {{questions.0.tag.tag1}} </p></a>
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' tags.0.text %}"><p> {{tags.0.text}} </p></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' questions.0.tag.tag2 %}"><p> {{questions.0.tag.tag2}} </p></a>
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' tags.1.text %}"><p> {{tags.1.text}} </p></a>
                         </li>
                     </ul>
 
                     </div>
                 </div>
-                 <div class="row my-4 p-1 ">
+                 <div class="row offset-md-2 my-4 p-1 mt-5 pt-5 ">
                     <div class="col-12 ">
                         <h1 class="font-italic">Best Members</h1>
-                        <p>
-                            there are going to be best members
-                        </p>
+                           <ul class="nav m-0 justify-content-start" type="none">
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="#"><p> {{profiles.0}} </p></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="#"><p> {{profiles.1}} </p></a>
+                        </li>
+                    </ul>
 
                     </div>
                 </div>

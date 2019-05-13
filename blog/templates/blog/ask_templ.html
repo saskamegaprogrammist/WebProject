@@ -8,7 +8,7 @@
                      </div>
                     <div class="col-6 mt-5 p-4">
                           <div class="row d-flex justify-content-center p-2 mt-5">
-                             <h3 class="text-white"> {{answer}} </h3>
+                             <h3 class="text-white"> {{answer.text}} </h3>
                           </div>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="row d-flex justify-content-start p-2 m-1">
                     <div class="col-4">
                         <div class="row d-flex justify-content-start p-2 m-1">
-                        <span class=" col-4 bg-secondary border border-secondary rounded-lg p-1 w-100"><p class="justify-content-center pt-3 text-center text-white">Num</p></span>
+                        <span class=" col-4 bg-secondary border border-secondary rounded-lg p-1 w-100"><p class="justify-content-center pt-3 text-center text-white">{{answer.rating}}</p></span>
                         <button type="button" class=" p-1 col-4 btn btn-danger rounded-lg btn-sm">Dislike</button>
                         <button type="button" class=" p-1 col-4 btn btn-success rounded-lg btn-sm">Like</button>
                         </div>
