@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
-from blog.models import Question, Profile, Tag, Answer
+from blog.models import Question, Profile, Tag, Answer, Like
 from faker import Faker
 from random import choice
 
@@ -72,6 +72,10 @@ class Command(BaseCommand):
                 title=fake.sentence(),
                 text='\n'.join(fake.sentences(fake.random_int(2, 5))),
                 rating = fake.random_int(1,100))
+            l = Like(content_object=q, positive=fake.random_int(1,100), negative= -fake.random_int(1,100))
+            l.save()
+            q.rating = l.positive + l.negative
+            q.save()
             for j in range(1, fake.random_int(1, 7)):
                 q.tag.add(choice(tags))
 
@@ -85,8 +89,12 @@ class Command(BaseCommand):
             Question.objects.values_list(
                 'id', flat=True))
         for i in range(answers_cnt):
-            Answer.objects.create(
+            a=Answer.objects.create(
                 author_id=choice(uids),
                 question_id=choice(qids),
                 text=fake.sentence(),
                 rating=fake.random_int(1, 100))
+            l = Like(content_object=a, positive=fake.random_int(1, 100), negative=-fake.random_int(1, 100))
+            l.save()
+            a.rating = l.positive + l.negative
+            a.save();

@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.db import models
-from django.utils import timezone
-
+from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import Avg, Max, Min, Count
 
 class ProfileManager(models.Manager):
     def best(self):
@@ -22,6 +24,33 @@ class Profile(models.Model):
         return self.user.username
 
 
+
+class TagManager(models.Manager):
+    def popular(self):
+         for i in self.all():
+             i.set_rating()
+         return self.order_by('-rating')
+
+class Tag(models.Model):
+    objects = TagManager()
+    text = models.CharField(max_length=200)
+    rating = models.IntegerField(default=0)
+
+    def set_rating(self):
+        self.rating = Question.objects.tagged(self).count()
+        self.save(update_fields=['rating'])
+
+    def __str__(self):
+        return self.text
+
+class Like(models.Model):
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+    positive = models.IntegerField()
+    negative = models.IntegerField()
+
+
 class QuestionManager(models.Manager):
     def new(self):
         return self.order_by('-created_at')
@@ -30,33 +59,7 @@ class QuestionManager(models.Manager):
         return self.order_by('-rating')
 
     def tagged(self, tag):
-        ans = []
-        quest = super().get_queryset()
-        for i in quest:
-            for j in i.get_tag():
-                if str(j) == tag:
-                    ans.append(i)
-        return ans
-
-class TagManager(models.Manager):
-    def popular(self):
-        tags = super().get_queryset()
-        for i in tags:
-            i.rating = len(Question.objects.tagged(str(i)))
-        return self.order_by('-rating')
-
-class Tag(models.Model):
-    objects = TagManager()
-    text = models.CharField(max_length=200)
-    rating = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.text
-
-class Like(models.Model):
-    positive = models.IntegerField()
-    negative = models.IntegerField()
-
+        return self.filter(tag__text=tag)
 
 class Question(models.Model):
     objects = QuestionManager()
@@ -66,29 +69,18 @@ class Question(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     tag = models.ManyToManyField(to=Tag)
-    like = models.ForeignKey(to=Like, on_delete=models.CASCADE, null=True)
+    like = GenericRelation(Like, related_query_name='question')
+
 
     def get_answers(self):
-        return len(Answer.objects.answers(self.id))
-
-    def get_tag(self):
-        return self.tag.all()
-
-    def set_rating(self, r):
-        self.rating=r
-        self.save()
+        return Answer.objects.filter(question__id=self.id).count()
 
     def __str__(self):
         return f"{self.pk} {self.title}"
 
 class AnswerManager(models.Manager):
     def answers(self,question_id):
-        ans = []
-        a = super().get_queryset()
-        for i in a:
-            if i.question_id==question_id:
-                ans.append(i)
-        return ans
+       return self.filter(question_id=question_id)
 
     def __str__(self):
         return f"{self.text}"
@@ -102,4 +94,4 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
     correct = models.BooleanField(default=False)
-    like = models.ForeignKey(to=Like, on_delete=models.CASCADE, null=True)
+    like = GenericRelation(Like, related_query_name='answer')

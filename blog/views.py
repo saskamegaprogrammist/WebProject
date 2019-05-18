@@ -2,10 +2,8 @@ import random
 from django.shortcuts import render
 from django.core.paginator import InvalidPage, Paginator
 from django.utils import timezone
-from .models import Question, Profile,  Answer,Tag
 from django.http import Http404
-
-
+from .models import Answer, Question, Like, Profile, Tag
 #def post_list(request):
     #posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
    # return render(request, 'blog/index.html',
@@ -18,20 +16,20 @@ from django.http import Http404
 
 def questions_list(request):
     que = paginate(Question.objects.new(), request)
-    return render_all(request, 'blog/index.html',**{'paginations': que})
+    return render(request, 'blog/index.html', {'paginations': que})
 
 def ask_question(request):
-    return render_all(request, 'blog/ask.html', **{})
+    return render(request, 'blog/ask.html', {})
 
 def login(request):
-    return render_all(request, 'blog/login.html', **{})
+    return render(request, 'blog/login.html', {})
 
 def signup(request):
-    return render_all(request, 'blog/signup.html', **{})
+    return render(request, 'blog/signup.html', {})
 
 def hot_questions(request):
     que = paginate(Question.objects.best(), request)
-    return render_all(request, 'blog/hot_questions.html', **{'paginations': que})
+    return render(request, 'blog/hot_questions.html', {'paginations': que})
 
 def tag(request, tag):
     try:
@@ -39,7 +37,7 @@ def tag(request, tag):
     except Tag.DoesNotExist:
         raise Http404("Tag does not exist")
     que = paginate(Question.objects.tagged(tag), request)
-    return render_all(request, 'blog/tag_question.html', **{'tag': tag, 'paginations': que})
+    return render(request, 'blog/tag_question.html', {'tag': tag, 'paginations': que})
 
 def question_num(request, question_id):
     try:
@@ -47,12 +45,7 @@ def question_num(request, question_id):
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
     que = paginate(Answer.objects.answers(question_id), request)
-    return render_all(request, 'blog/question.html', **{'question': q, 'paginations': que})
-
-def render_all(request, template, **arguments):
-    arguments['profiles'] = Profile.objects.best()
-    arguments['tags'] = Tag.objects.popular()
-    return render(request, template, arguments)
+    return render(request, 'blog/question.html', {'question': q, 'paginations': que})
 
 
 def paginate(objects_list, request):

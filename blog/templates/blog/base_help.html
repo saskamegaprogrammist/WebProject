@@ -1,0 +1,28 @@
+<div class="row offset-md-2 my-4 p-1 mt-5 pt-5 ">
+                    <div class="col-12 ">
+                        <h1 class="font-italic">Popular tags</h1>
+                         <ul class="nav m-0 justify-content-start" type="none">
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' tags.0.text %}"><p> {{tags.0.text}} </p></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="{% url 'blog:tag' tags.1.text %}"><p> {{tags.1.text}} </p></a>
+                        </li>
+                    </ul>
+
+                    </div>
+                </div>
+                 <div class="row offset-md-2 my-4 p-1 mt-5 pt-5 ">
+                    <div class="col-12 ">
+                        <h1 class="font-italic">Best Members</h1>
+                           <ul class="nav m-0 justify-content-start" type="none">
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="#"><p> {{profiles.0}} </p></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active mt-2"  href="#"><p> {{profiles.1}} </p></a>
+                        </li>
+                    </ul>
+
+                    </div>
+                </div>

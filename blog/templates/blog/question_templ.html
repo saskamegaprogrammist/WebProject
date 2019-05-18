@@ -37,7 +37,7 @@
                         <li>
                             <p class="mt-3 text-white" > Tags:</p>
                         </li>
-                         {% for q in question.get_tag %}
+                         {% for q in question.tag.all %}
                          <li class="nav-item">
                             <a class="nav-link active mt-2"  href="{% url 'blog:tag' q %}"><p> {{q}} </p></a>
                         </li>
