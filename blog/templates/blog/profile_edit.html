@@ -1,18 +1,21 @@
 {% extends 'blog/base.html' %}
 {% load static %}
-{% block title %} New Question {% endblock %}
+{% block title %} Edit Profile {% endblock %}
 {% block content %}
 <div class="container mt-4">
     <div class="row d-flex justify-content-start">
          <div class="col-6 m-0 p-1">
-            <h3>New Question</h3>
+            <h3>Edit Profile</h3>
+        </div>
+        <div class="col-6 my-1 p-1">
+            <a href="{% url 'blog:profile' %}"><p> Profile </p></a>
         </div>
     </div>
          <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-dark"  method="POST"  novalidate>
         {% csrf_token %}
         {% include 'blog/form.html' %}
          <div class="row <div class d-flex justify-content-start">
-        <button class="btn btn-danger ml-4  offset-0" type="submit"><h4 class="mt-1">Ask!</h4></button>
+        <button class="btn btn-danger ml-4  offset-0" type="submit"><h4 class="mt-1">Edit!</h4></button>
         </div>
     </form>
     </div>

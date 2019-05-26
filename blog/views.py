@@ -1,9 +1,14 @@
 import random
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.core.paginator import InvalidPage, Paginator
-from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import auth
 from django.http import Http404
 from .models import Answer, Question, Like, Profile, Tag
+from .forms import LoginForm, SignUpForm, AskForm, AnswerForm
+from django.contrib.auth.decorators import login_required
+
+
 #def post_list(request):
     #posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
    # return render(request, 'blog/index.html',
@@ -21,13 +26,73 @@ def questions_list(request):
 def ask_question(request):
     return render(request, 'blog/ask.html', {})
 
+def profile_edit(request):
+    try:
+        profile = Profile.objects.get(user__username=request.user)
+    except:
+        return render(request, 'blog/not_authorized.html', {})
+    if request.POST:
+        form = SignUpForm(profile, request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(request.META.get('HTTP_REFERER'))
+    else:
+        form = SignUpForm(profile)
+
+    return render(request, 'blog/profile_edit.html', {'form':form})
+
+def show_profile(request):
+    try:
+        profile = Profile.objects.get(user__username=request.user)
+    except:
+        return render(request, 'blog/not_authorized.html', {})
+    return render(request, 'blog/profile.html', {'profile' : profile})
+
+def logout(request):
+        auth.logout(request)
+        return redirect(request.META.get('HTTP_REFERER'))
+
+
 def login(request):
-    return render(request, 'blog/login.html', {})
+    if request.POST:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            cdata = form.cleaned_data
+            user = auth.authenticate(**cdata)
+            if user is not None:
+                auth.login(request, user)
+                return redirect('blog:index')
+            else:
+                form.add_error('password', 'Wrong password')
+
+    else:
+        form=LoginForm()
+    return render(request, 'blog/login.html', {'form' : form})
+
 
 def signup(request):
-    return render(request, 'blog/signup.html', {})
+    if request.POST:
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blog:index')
+    else:
+        form=SignUpForm()
+    return render(request, 'blog/signup.html', {'form' : form})
+
+@login_required
+def ask(request):
+    if request.POST:
+        form = AskForm(request.user.profile, data=request.POST)
+        if form.is_valid():
+            q = form.save()
+            return redirect(reverse('blog:question_num', kwargs={'question_id': q.id}))
+    else:
+        form = AskForm(request.user.profile)
+    return render(request, 'blog/ask.html', {'form': form})
 
 def hot_questions(request):
+    logout(request)
     que = paginate(Question.objects.best(), request)
     return render(request, 'blog/hot_questions.html', {'paginations': que})
 
@@ -45,7 +110,18 @@ def question_num(request, question_id):
     except Question.DoesNotExist:
         raise Http404("Question does not exist")
     que = paginate(Answer.objects.answers(question_id), request)
-    return render(request, 'blog/question.html', {'question': q, 'paginations': que})
+
+    if request.user.is_authenticated :
+        profile = Profile.objects.get(user__username=request.user)
+        if request.POST:
+            profile = Profile.objects.get(user__username=request.user)
+            form = AnswerForm(profile, q, request.POST)
+            if form.is_valid():
+                a =form.save()
+                return redirect(a)
+        else:
+            form = AnswerForm(profile, q)
+    return render(request, 'blog/question.html', {'question': q, 'paginations': que, 'form':form})
 
 
 def paginate(objects_list, request):

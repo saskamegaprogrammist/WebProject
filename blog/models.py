@@ -95,3 +95,6 @@ class Answer(models.Model):
     rating = models.IntegerField(default=0)
     correct = models.BooleanField(default=False)
     like = GenericRelation(Like, related_query_name='answer')
+
+    def get_absolute_url(self):
+        return "/question/%i" % self.question.id

@@ -4,9 +4,7 @@
             <span class="border border-secondary p-1 m-1 w-100 bg-dark rounded-lg ">
                 <div class="row d-flex justify-content-center w-100">
                      <div class="col-4 offset-1 m-0 p-1">
-                          {% with name=question.author_id %}
                          <img class=" rounded-circle m-3 p-3" width="240" height="240" src="{% static question.author.get_avatar %}" alt="AVATAR">
-                         {% endwith %}
                      </div>
                     <div class="col-6 mt-5 p-4">
                           <div class="row d-flex justify-content-center p-2 m-1">

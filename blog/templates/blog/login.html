@@ -6,29 +6,9 @@
     <div class="row d-flex justify-content-start">
            <h3 class="ml-3">Login</h3>
     </div>
-    <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-dark" novalidate>
-        <div class="form-group">
-            <div class="row d-flex justify-content-start">
-                <label  class="col-2 ml-3 p-1" for="Login"><p class="question d-flex justify-content-between text-justify font-weight-light text-white">Login:</p></label>
-                <div class="col-9 offset-md-1 m-2 pt-2">
-                <input type="text" class="form-control is-invalid form-control-lg  " id="Login" aria-describedby="loginHelp" placeholder="Enter your login" required>
-                 <div class="invalid-feedback">
-                     <p>Wrong login</p>
-                </div>
-                </div>
-            </div>
-        </div>
-          <div class="form-group">
-            <div class="row <div class d-flex justify-content-start">
-                <label  class="col-2 ml-3  p-1" for="Passw"><p class="question d-flex justify-content-between text-justify  text-white font-weight-light">Password:</p></label>
-                <div class="col-9 offset-md-1 m-2 pt-2">
-                <input type="password" class="input-lg form-control is-invalid " id="Passw" aria-describedby="passwHelp" placeholder="Enter your password"  data-toggle="password" required>
-                <div class="invalid-feedback">
-                     <p>Wrong password</p>
-                </div>
-                </div>
-            </div>
-        </div>
+    <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-dark"  method="POST"  novalidate>
+        {% csrf_token %}
+        {% include 'blog/form.html' %}
         <div class="row <div class d-flex justify-content-start">
         <button class="btn btn-danger ml-4  offset-0" type="submit"><h4 class="mt-1">Login!</h4></button>
         </div>
@@ -36,8 +16,6 @@
         <a class="nav-link active mt-2"  href="{% url 'blog:signup' %}"><p> Create a new account </p></a>
     </div>
     </form>
-
-
 </div>
 
 

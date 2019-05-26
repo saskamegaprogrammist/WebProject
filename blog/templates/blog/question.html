@@ -7,22 +7,15 @@
      {% for answer in paginations %}
         {% include "blog/ask_templ.html" %}
     {% endfor %}
-    <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-secondary" novalidate>
-          <div class="form-group">
-            <div class="row d-flex justify-content-start">
-                <label  class="col-2 ml-3 mt-3  p-1" for="Text"><p class="question d-flex justify-content-between text-justify  text-white font-weight-light">Your answer:</p></label>
-                <div class="col-9 offset-md-1 m-2 pt-2">
-                <textarea class="input-lg form-control is-invalid" id="Text" rows="6"  aria-describedby="textHelp" placeholder="Enter your answer"  required></textarea >
-                    <div class="invalid-feedback">
-                     <p>Please put content</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+    {% if request.user.is_authenticated %}
+    <form class="border border-secondary p-2 mt-2 w-75 rounded-lg bg-secondary"  method="POST"  novalidate>
+          {% csrf_token %}
+        {% include 'blog/form.html' %}
         <div class="row <div class d-flex justify-content-start">
         <button class="btn btn-danger ml-4  offset-0" type="submit"><h4 class="mt-1">Answer!</h4></button>
         </div>
     </form>
+    {% endif %}
      {% include "blog/paginator.html" %}
 </div>
 

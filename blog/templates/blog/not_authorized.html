@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row d-flex justify-content-start">
+         <div class="col-6 m-0 p-1">
+            <h3>Profile</h3>
+        </div>
+        <div class="col-6 my-1 p-1">
+            <a href="{% url 'blog:profile_edit' %}"><p>Edit Profile</p></a>
+        </div>
+    </div>
+
+    <div class="row d-flex flex-row justify-content-start ">
+            <span class="border border-secondary p-1 m-1 w-100 bg-dark rounded-lg ">
+                <div class="row d-flex justify-content-center w-100">
+                     <div class="col-4 offset-1 m-0 p-1">
+                         <img class=" rounded-circle m-3 p-3" width="240" height="240" src="{% static 'img/c0ef47087edbb2ff747718af5f34c649.jpg' %}" alt="sorry">
+                     </div>
+                    <div class="col-8 mt-5 p-4">
+                        <div class="row <div class d-flex justify-content-start">
+                             <div class="col-11 offset-lg-1 ml-3  p-4  text-white">
+                                  <h1 class="font-italic"> Sorry, you are not logged in...</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+    </div>
+
+
+    </div>
+
+
+{% endblock %}

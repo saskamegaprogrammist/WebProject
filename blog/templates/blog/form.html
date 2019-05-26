@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+
+{% for err in form.non_field_errors %}
+    <p class="text-danger">{{ err }}</p>
+{% endfor %}
+
+{% for field in form.hidden_fields %}
+    {{ field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    <div class="form-group">
+         <div class="row d-flex justify-content-start">
+             <p class="question d-flex justify-content-between text-justify font-weight-light text-white col-2 ml-3 p-1" > {{ field.label_tag }} </p>
+              <div class="col-9 offset-md-1 m-2 pt-2">
+            {% render_field field class="form-control is-invalid form-control-lg"  %}
+            {% for error in field.errors %}
+                <div class="invalid-feedback">
+                    <p>{{ error }}</p>
+                </div>
+            {% endfor %}
+        {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+        {% endif %}
+              </div>
+             </div>
+    </div>
+{% endfor %}
