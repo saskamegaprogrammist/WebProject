@@ -68,7 +68,7 @@ def login(request):
 
 def signup(request):
     if request.POST:
-        form = SignUpForm(request.POST)
+        form = SignUpForm(data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('blog:index')

@@ -27,11 +27,12 @@ class SignUpForm(forms.Form):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat your password'}), label="Repeat password")
     avatar = forms.FileField(label="UploadAvatar", required=False)
 
-    def __init__(self, profile, *args, **kwargs):
+    def __init__(self, profile=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['password'].required=False
-        self.fields['password2'].required=False
-        self.initial={'username':profile.user.username, 'email':profile.user.email, 'nick':profile.user.first_name}
+        if profile is not None:
+            self.fields['password'].required=False
+            self.fields['password2'].required=False
+            self.initial={'username':profile.user.username, 'email':profile.user.email, 'nick':profile.user.first_name}
 
 
     def clean_username(self):
