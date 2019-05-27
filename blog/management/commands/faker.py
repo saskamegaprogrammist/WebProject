@@ -26,6 +26,7 @@ class Command(BaseCommand):
         answers_cnt = options['answers']
         tags_cnt = options['tags']
 
+
         if users_cnt is not None:
             self.generate_users(users_cnt)
 
@@ -37,6 +38,8 @@ class Command(BaseCommand):
 
         if tags_cnt is not None:
             self.generate_tags(tags_cnt)
+
+
 
     def generate_users(self, users_cnt):
         print(f"GENERATE USERS {users_cnt}")
@@ -74,7 +77,7 @@ class Command(BaseCommand):
                 rating = fake.random_int(1,100))
             l = Like(content_object=q, positive=fake.random_int(1,100), negative= -fake.random_int(1,100))
             l.save()
-            q.rating = l.positive + l.negative
+            q.rating = l.rating
             q.save()
             for j in range(1, fake.random_int(1, 7)):
                 q.tag.add(choice(tags))
@@ -96,5 +99,5 @@ class Command(BaseCommand):
                 rating=fake.random_int(1, 100))
             l = Like(content_object=a, positive=fake.random_int(1, 100), negative=-fake.random_int(1, 100))
             l.save()
-            a.rating = l.positive + l.negative
-            a.save();
+            a.rating = l.rating
+            a.save()

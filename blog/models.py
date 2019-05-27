@@ -24,21 +24,8 @@ class Profile(models.Model):
         return self.user.username
 
 
-
-class TagManager(models.Manager):
-    def popular(self):
-         for i in self.all():
-             i.set_rating()
-         return self.order_by('-rating')
-
 class Tag(models.Model):
-    objects = TagManager()
     text = models.CharField(max_length=200)
-    rating = models.IntegerField(default=0)
-
-    def set_rating(self):
-        self.rating = Question.objects.tagged(self).count()
-        self.save(update_fields=['rating'])
 
     def __str__(self):
         return self.text
@@ -47,8 +34,8 @@ class Like(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-    positive = models.IntegerField()
-    negative = models.IntegerField()
+    rating = models.IntegerField()
+
 
 
 class QuestionManager(models.Manager):
@@ -57,7 +44,6 @@ class QuestionManager(models.Manager):
 
     def best(self):
         return self.order_by('-rating')
-
     def tagged(self, tag):
         return self.filter(tag__text=tag)
 

@@ -26,11 +26,9 @@ def questions_list(request):
 def ask_question(request):
     return render(request, 'blog/ask.html', {})
 
+@login_required
 def profile_edit(request):
-    try:
-        profile = Profile.objects.get(user__username=request.user)
-    except:
-        return render(request, 'blog/not_authorized.html', {})
+    profile = Profile.objects.get(user__username=request.user)
     if request.POST:
         form = SignUpForm(profile, request.POST)
         if form.is_valid():
@@ -41,11 +39,9 @@ def profile_edit(request):
 
     return render(request, 'blog/profile_edit.html', {'form':form})
 
+@login_required
 def show_profile(request):
-    try:
-        profile = Profile.objects.get(user__username=request.user)
-    except:
-        return render(request, 'blog/not_authorized.html', {})
+    profile = Profile.objects.get(user__username=request.user)
     return render(request, 'blog/profile.html', {'profile' : profile})
 
 def logout(request):
@@ -92,7 +88,6 @@ def ask(request):
     return render(request, 'blog/ask.html', {'form': form})
 
 def hot_questions(request):
-    logout(request)
     que = paginate(Question.objects.best(), request)
     return render(request, 'blog/hot_questions.html', {'paginations': que})
 
